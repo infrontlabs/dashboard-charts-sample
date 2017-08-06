@@ -1,0 +1,38 @@
+* 
+    margin: 0
+    padding: 0
+
+body, html
+    height: 100%
+    font-family: sans-serif
+
+.dashboard 
+    @media only screen and (min-width : 1224px)
+        display: grid
+        height: 100%
+        grid-template-columns: 200px 1fr
+        grid-template-rows: 50px 1fr 100px
+        grid-template-areas: "navbar navbar" "leftnav main" "footer footer"
+
+.navbar 
+    grid-area: navbar
+    background-color: #eee
+    color: #333
+
+.leftnav
+    grid-area: leftnav
+    background-color: #333
+    color: white
+
+.main 
+    padding: 20px
+
+    @media only screen and (min-width : 1224px)
+        display: grid
+        grid-area: main
+        grid-template-columns: 1fr 1fr
+
+.footer 
+    grid-area: footer
+    background-color: #333
+    color: white

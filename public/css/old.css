@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 100px 500px 1fr;
+}
+
+.navbar {
+  grid-area: navbar;
+  background-color: #333;
+  color: white;
+}
+
+.leftnav {
+  grid-area: leftnav;
+  background-color: red;
+}
+
+.main {
+  grid-area: main;
+  padding: 20px;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: #333;
+  color: white;
+}
+
