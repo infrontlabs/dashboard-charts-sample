@@ -97,37 +97,6 @@ Route::get('/chart/revenue1', function() {
 
 });
 
-Route::get('/chart/stocks', function() {
-
-    return [
-        "chart" => [
-            "caption" => "Real-time stock price monitor",
-            "subCaption" => "Harry's SuperMart",
-            "xAxisName" => "Time",
-            "yAxisName" => "Stock Price",
-            "numberPrefix" => "$",
-            "refreshinterval" => "5",
-            "yaxisminvalue" => "35",
-            "yaxismaxvalue" => "36",
-            "numdisplaysets" => "10",
-            "labeldisplay" => "rotate",
-            "showValues" => "0",
-            "showRealTimeValue" => "0",
-            "theme" => "zune"
-        ],
-        "categories" => [
-            [
-                "category" => [
-                    "label" => date("H:i:s")
-                ]
-            ]
-        ],
-        "dataset" => [
-            "data" => [
-                [
-                    "value" => rand(35, 40)
-                ]
-            ]
-        ]
-    ];
+Route::get('/chart/sessions', function() {
+    return "&label=" . date("h:i:s") . "&value=" . rand(35, 40);
 });

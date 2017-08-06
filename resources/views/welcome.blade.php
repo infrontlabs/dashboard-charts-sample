@@ -48,55 +48,50 @@
             }).render();
 
             new FusionCharts({
-                id: "stockRealTimeChart",
+                id: "realTimeSessions",
                 type: 'realtimeline',
                 renderAt: 'chart3',
                 width: '100%',
                 height: '300',
-                dataFormat: 'jsonurl',
-                dataSource: '/chart/stocks',
-                "events": {
-                    "initialized": function (e) {
-                        function addLeadingZero(num) {
-                            return (num <= 9) ? ("0" + num) : num;
-                        }
-                        function updateData() {
-                            // Get reference to the chart using its ID
-                            var chartRef = FusionCharts("stockRealTimeChart"),
-                                // We need to create a querystring format incremental update, containing
-                                // label in hh:mm:ss format
-                                // and a value (random).
-                                currDate = new Date(),
-                                label = addLeadingZero(currDate.getHours()) + ":" +
-                                    addLeadingZero(currDate.getMinutes()) + ":" +
-                                    addLeadingZero(currDate.getSeconds()),
-                                // Get random number between 35.25 & 35.75 - rounded to 2 decimal places
-                                randomValue = Math.floor(Math.random()
-                                    * 50) / 100 + 35.25,
-                                // Build Data String in format &label=...&value=...
-                                strData = "&label=" + label
-                                    + "&value="
-                                    + randomValue;
-
-                                 console.log(strData) 
-
-                                 window.axios.get("/chart/stocks").then(function(response) {
-                                     console.log(response.data.categories[0]);
-                                     console.log(response.data.dataset.data[0]);
-                                      strData = "&label=" + response.data.categories[0].category.label
-                                            + "&value="
-                                            + response.data.dataset.data[0].value;
-                                    chartRef.feedData(strData);
-                                 })
-                            // Feed it to chart.
-                            
-                        }
-
-                        var myVar = setInterval(function () {
-                            updateData();
-                        }, 5000);
+                dataFormat: 'json',
+                dataSource: {
+                chart: {
+                    theme: "zune",
+                    caption: "Active Sessions",
+                    slantlabels: 1,
+                    labeldisplay: "rotate",
+                    yaxismaxvalue: "100",
+                    showrealtimevalue: "0",
+                    datastreamurl: "/chart/sessions",
+                    refreshinterval: "2",
+                    showlabels: "1",
+                    showborder: "0"
+                },
+                categories: [
+                    {
+                        category: [
+                            {
+                                label: "Start",
+                                stepSkipped: true,
+                                appliedSmartLabel: true,
+                                leftShift: 1,
+                                delete: true
+                            }
+                        ]
                     }
-                }
+                ],
+                dataset: [
+                    {
+                        showvalues: 0,
+                        showlabels: 1,
+                        data: [
+                            {
+                                value: 0
+                            }
+                        ]
+                    }
+                ]
+            }
             }).render();
         });
     </script>
